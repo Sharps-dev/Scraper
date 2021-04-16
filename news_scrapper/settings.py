@@ -64,6 +64,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'news_scrapper.pipelines.JsonWriterPipeline': 300,
+   'news_scrapper.pipelines.RequestPipeline' : 800
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -88,3 +89,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 ITEM_OUTPUT_PATH = 'items.json'
+BATCH_SIZE = 64
+API_ENDPOINT = 'https://sharpsback.herokuapp.com/content/many' 
