@@ -1,5 +1,7 @@
 import scrapy 
 from news_scrapper.items import ContentItem
+from news_scrapper.settings import ITEM_OUTPUT_PATH
+import json
 class NewsSpider(scrapy.Spider):
     name='news'
 
@@ -11,6 +13,7 @@ class NewsSpider(scrapy.Spider):
             yield scrapy.Request(url=url,callback=self.parse_content)
         
     def parse_content(self , response):
+
         for a in response.css('.post-block'):
             title = a.css('.post-block__header a.post-block__title__link::text').get()
             url = a.css('.post-block__header a.post-block__title__link').attrib['href']
