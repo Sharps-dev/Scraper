@@ -43,11 +43,14 @@ class RequestPipeline:
             self.send_request()
             self.body = []
             self.counter = 0
-
+    #TODO : move to utils and make purification more efficient
+    def purify_url(self , url):
+        return url.split('//')[-1].split('/')[0] ,'/'+'/'.join(url.split('//')[-1].split('/')[1:])
 
     def update_body(self , item):
         item = ItemAdapter(item).asdict()
-        self.body+=[{'image' : item['image_url'] , 'longUrl' : item['url'] , 
+        domain , path = self.purify_url(item['url'])
+        self.body+=[{'image' : item['image_url'] , 'domain' : domain , 'path' : path, 
                 'des': item['description'] , 'title' : item['title']}]
         
     def send_request(self):
