@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
+RUN python3 -m pip3 install --upgrade pip
+
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
