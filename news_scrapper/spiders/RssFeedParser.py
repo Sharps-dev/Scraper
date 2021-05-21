@@ -10,8 +10,14 @@ class RssfeedparserSpider(XMLFeedSpider):
     itertag='item'
 
     def parse_node(self, response , node):
-        title = node.xpath('//title/text()').get() 
-        url = node.xpath('//link/text()').get()
-        description = node.xpath('//description/text()').get()
-
-        yield ContentItem(title=title , url = url , description = description)
+        item = ContentItem()
+        item['title'] = node.xpath('//title/text()').get() 
+        item['url'] = node.xpath('//link/text()').get()
+        item['description'] = node.xpath('//description/text()').get()
+        # print(item.title)
+        yield response.follow(item['url'] , self.get_image , cb_kwargs=dict(item=item))
+    
+    def get_image(self , response , item):
+        # print("hdasdasdi")
+        item['image_url'] = response.css('img').xpath('@src').get()
+        yield item

@@ -2,8 +2,8 @@ import scrapy
 from news_scrapper.items import ContentItem
 from news_scrapper.settings import ITEM_OUTPUT_PATH
 import json
-class NewsSpider(scrapy.Spider):
-    name='news'
+class TechCrunchSpider(scrapy.Spider):
+    name='techcrunch'
 
     def start_requests(self):
         urls = [

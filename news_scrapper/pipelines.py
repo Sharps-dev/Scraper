@@ -45,7 +45,7 @@ class RequestPipeline:
             self.counter = 0
     #TODO : move to utils and make purification more efficient
     def purify_url(self , url):
-        return url.split('//')[-1].split('/')[0] ,'/'+'/'.join(url.split('//')[-1].split('/')[1:])
+        return url.replace("www.","").split('//')[-1].split('/')[0] ,'/'+'/'.join(url.split('//')[-1].split('/')[1:])
 
     def update_body(self , item):
         item = ItemAdapter(item).asdict()
@@ -55,4 +55,6 @@ class RequestPipeline:
         
     def send_request(self):
         res = requests.post(API_ENDPOINT , json = self.body)
-        print(res)
+        if res.status_code!=201:
+            raise Exception(res.status_code)
+        print("db response : {}".format(res))

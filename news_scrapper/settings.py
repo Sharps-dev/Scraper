@@ -89,5 +89,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 ITEM_OUTPUT_PATH = 'items.json'
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 API_ENDPOINT = 'https://sharpsback.herokuapp.com/content/many' 
