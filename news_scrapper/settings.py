@@ -91,3 +91,4 @@ ITEM_PIPELINES = {
 ITEM_OUTPUT_PATH = 'items.json'
 BATCH_SIZE = 32
 API_ENDPOINT = 'https://sharpsback.herokuapp.com/content/many' 
+DELIM='||'

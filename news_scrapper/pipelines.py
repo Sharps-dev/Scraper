@@ -6,7 +6,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-from news_scrapper.settings import ITEM_OUTPUT_PATH , BATCH_SIZE , API_ENDPOINT
+from news_scrapper.settings import ITEM_OUTPUT_PATH , BATCH_SIZE , API_ENDPOINT , DELIM
 import requests
 import json
 
@@ -49,12 +49,17 @@ class RequestPipeline:
 
     def update_body(self , item):
         item = ItemAdapter(item).asdict()
+        # print("hereee : {}".format(item['tags'].split(DELIM)))
         domain , path = self.purify_url(item['url'])
-        self.body+=[{'image' : item['image_url'] , 'domain' : domain , 'path' : path, 
-                'des': item['description'] , 'title' : item['title']}]
+        if item['description'] is not None and item['tags'] is not None and item['image_url'] is not None:
+            self.body+=[{'image' : item['image_url'] , 'domain' : domain , 'path' : path, 
+                    'des': item['description'] , 'title' : item['title'],'tags':item['tags'].split(DELIM)}]
         
     def send_request(self):
         res = requests.post(API_ENDPOINT , json = self.body)
         if res.status_code!=201:
+            print("here")
+            print(self.body)
             raise Exception(res.status_code)
+            
         print("db response : {}".format(res))

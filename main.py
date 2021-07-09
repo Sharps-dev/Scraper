@@ -9,5 +9,5 @@ from news_scrapper.spiders.vancouversun_spider import VancouversunSpider
 
 
 process = CrawlerProcess(get_project_settings())
-process.crawl(EastasiaforumSpider)
+process.crawl(RssfeedparserSpider)
 process.start()

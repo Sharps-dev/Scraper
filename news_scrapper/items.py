@@ -13,3 +13,4 @@ class ContentItem(Item):
     description = Field()
     url = Field()
     image_url = Field()
+    tags=Field()

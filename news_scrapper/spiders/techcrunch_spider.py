@@ -19,4 +19,5 @@ class TechCrunchSpider(scrapy.Spider):
             url = a.css('.post-block__header a.post-block__title__link').attrib['href']
             image_url = a.css('.post-block__media img').attrib['src']
             description = a.css('.post-block__content::text').get()
-            yield ContentItem(title=title , url = url , image_url=image_url , description = description)
+            tags = 'tech'
+            yield ContentItem(title=title, url=url, image_url=image_url, description=description, tags=tags)
