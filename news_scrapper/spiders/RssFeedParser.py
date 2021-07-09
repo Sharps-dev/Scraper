@@ -14,6 +14,7 @@ class RssfeedparserSpider(XMLFeedSpider):
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml' ,
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml' , 'https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml',
     'https://rss.nytimes.com/services/xml/rss/nyt/Sports.xml','https://rss.nytimes.com/services/xml/rss/nyt/Health.xml']
+
     itertag='item'
 
     def parse_node(self, response , node):
